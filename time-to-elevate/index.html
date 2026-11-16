@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Time to Elevate · Ian Kanyi's 30th</title>
+  <meta name="description" content="You're invited to Ian Kanyi's 30th birthday celebration. Friday 27 November 2026, 7 PM till midnight. RSVP to receive the venue.">
+  <meta name="theme-color" content="#120c19">
+
+  <!-- Link previews (WhatsApp, iMessage, socials). After deploying, replace /og.jpg with your full URL, e.g. https://your-site.vercel.app/og.jpg -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Time to Elevate · Ian Kanyi turns 30">
+  <meta property="og:description" content="Friday 27 November 2026 · 7 PM till midnight. Solve the riddle to open your invitation.">
+  <meta property="og:image" content="/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..800;1,6..96,400..800&family=Jost:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script>try{if(localStorage.getItem("tte-riddle-solved")==="1")document.documentElement.classList.add("returning")}catch(e){}</script>
+</head>
+<body class="locked">
+
+  <!-- =========================================================
+       1. RIDDLE GATE
+       ========================================================= -->
+  <section id="riddle" class="riddle" aria-labelledby="riddle-q">
+    <div class="riddle-inner">
+      <p class="eyebrow">Before you enter · Answer one riddle</p>
+      <h1 id="riddle-q" class="rq">
+        <span class="rq-line">What goes <span class="rq-up" aria-hidden="true"><span>u</span><span>p</span></span><span class="sr">up</span></span>
+        <span class="rq-line">but never <em>goes down?</em></span>
+      </h1>
+
+      <form id="riddle-form" class="riddle-form" autocomplete="off" novalidate>
+        <label for="answer" class="sr">Your answer</label>
+        <input id="answer" name="answer" type="text" placeholder="Type your answer" maxlength="40"
+               autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go">
+        <button class="btn btn-gold" type="submit">Answer</button>
+      </form>
+
+      <div class="tiles" id="tiles" hidden aria-hidden="true"><span>A</span><span>G</span><span>E</span></div>
+      <p id="riddle-msg" class="riddle-msg" role="status">Get it right to open your invitation.</p>
+      <p id="riddle-count" class="riddle-count" hidden></p>
+      <button id="riddle-continue" class="btn btn-ghost" type="button" hidden>Open my invitation</button>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       2. THREE.JS INVITATION FOLDER
+       ========================================================= -->
+  <div id="intro" class="intro" aria-label="Your invitation folder">
+    <div id="flash" class="flash"></div>
+    <button id="skip" class="skip" type="button" hidden>Skip</button>
+    <div class="intro-ui"><p class="hint hide" id="hint">Tap to break the seal</p></div>
+  </div>
+
+  <canvas id="motes" aria-hidden="true"></canvas>
+
+  <!-- =========================================================
+       3. THE INVITATION
+       ========================================================= -->
+  <main>
+    <section class="hero" id="top">
+      <div class="ghost-30" aria-hidden="true">30</div>
+      <div class="wrap">
+        <p class="eyebrow rise">Ian Kanyi turns thirty</p>
+        <h2 class="title rise" aria-label="Time to Elevate">
+          <span class="t-pre">Time to</span>
+          <span class="t-main foil">Elevate</span>
+        </h2>
+        <p class="hero-lede rise">You're invited to my 30th birthday celebration.</p>
+        <div class="dateline rise">
+          <span>Friday</span><span class="dot"></span><em>27 November 2026</em><span class="dot"></span><span>7 PM</span>
+        </div>
+        <div class="countdown rise" aria-label="Countdown to the celebration">
+          <div><b id="cd-d">00</b><span>Days</span></div>
+          <div><b id="cd-h">00</b><span>Hours</span></div>
+          <div><b id="cd-m">00</b><span>Minutes</span></div>
+          <div><b id="cd-s">00</b><span>Seconds</span></div>
+        </div>
+        <p class="cd-note rise" id="cd-note">until the doors open</p>
+        <a class="btn btn-gold rise" href="#rsvp">Reserve my seat</a>
+      </div>
+    </section>
+
+    <section class="band velvet" id="evening">
+      <div class="wrap">
+        <div class="evening">
+          <svg class="clock" viewBox="0 0 200 200" role="img" aria-label="A clock with the hours from 7 PM to midnight highlighted in gold">
+            <defs>
+              <linearGradient id="arcgrad" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0" stop-color="#8f6a2e"/><stop offset=".5" stop-color="#f7e3a8"/><stop offset="1" stop-color="#d8b26a"/>
+              </linearGradient>
+            </defs>
+            <circle class="face" cx="100" cy="100" r="96"/>
+            <circle class="face dotted" cx="100" cy="100" r="62"/>
+            <g id="ticks"></g>
+            <path class="arc" d="M55 177.94 A90 90 0 0 1 100 10"/>
+            <text class="cap" x="100" y="128">P.M.</text>
+            <line class="hand" x1="100" y1="100" x2="80" y2="134.6" stroke-width="4"/>
+            <line class="hand m" x1="100" y1="100" x2="100" y2="38" stroke-width="2"/>
+            <circle class="pin" cx="100" cy="100" r="4.5"/>
+          </svg>
+          <div class="evening-copy">
+            <p class="eyebrow">The evening</p>
+            <h2>Five hours to rise, from <span class="foil">seven</span> till the clock strikes <span class="foil">twelve</span>.</h2>
+            <div class="hours"><b>7:00 PM</b><i>to</i><b>12:00 AM</b></div>
+            <div class="ontime">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="16" cy="18" r="11"/><path d="M16 11v7l4.5 3M12 3h8M16 3v4M26 7l2.5 2.5"/></svg>
+              <p><strong>Please be on time.</strong>The night opens at 7 PM sharp, and the best moments happen early. Arriving on time is highly encouraged.</p>
+            </div>
+          </div>
+        </div>
+
+        <dl class="details">
+          <div><dt>Date</dt><dd>Friday<br>27 November 2026</dd></div>
+          <div><dt>Hours</dt><dd>7 PM till midnight<small>An evening celebration</small></dd></div>
+          <div><dt>Venue</dt><dd><span class="lock"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1"/><path d="M5 7V5a3 3 0 0 1 6 0v2"/></svg>Kept secret</span><small>Shared privately with guests who RSVP.</small></dd></div>
+          <div><dt>Admission</dt><dd>Admits one<small>One guest per invitation.</small></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="band" id="admission">
+      <div class="wrap center">
+        <div class="rule" aria-hidden="true"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 0l2.4 7.6L20 10l-7.6 2.4L10 20l-2.4-7.6L0 10l7.6-2.4z"/></svg></div>
+        <p class="eyebrow">Admission</p>
+        <h2>This invitation is yours alone.</h2>
+        <p class="lede">Every invitation admits one person. If there's someone you'd love to bring, message me on WhatsApp and I'll send them an invitation of their own.</p>
+
+        <div class="ticket" aria-label="Admit one ticket">
+          <div class="main">
+            <span class="inner-border"></span>
+            <span class="serial">Nº 30 · Time to Elevate</span>
+            <h3>Admit <i>One</i></h3>
+            <p>Valid for one guest at Ian's 30th, Friday 27 November 2026, from 7 PM until midnight. Not transferable.</p>
+          </div>
+          <div class="stub">
+            <span class="inner-border"></span>
+            <span>Nov</span><b>27</b><span>2026</span>
+            <span class="vert">7 PM · Sharp</span>
+          </div>
+        </div>
+
+        <div class="extra">
+          <span class="numchip"><span class="wa-display" id="wa-chip">+254 740 085 764</span><button type="button" class="copy-num" data-target="wa-chip">Copy</button></span>
+          <a class="btn btn-ghost" id="wa-extra" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+            Ask for an extra invitation
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="band velvet" id="rsvp">
+      <div class="wrap">
+        <div class="rsvp">
+          <div class="rsvp-copy">
+            <p class="eyebrow">RSVP</p>
+            <h2>Will you rise with me?</h2>
+            <p class="lede">Leave your name and phone number to reserve your seat. The venue is shared only with guests who RSVP.</p>
+            <ol class="steps">
+              <li>Enter your name and phone number.</li>
+              <li>Your seat is added to the guest list.</li>
+              <li>Ian sends you the venue before the night.</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <form id="rsvp-form" novalidate>
+              <div class="field">
+                <label for="g-name">Your name</label>
+                <input id="g-name" name="name" type="text" autocomplete="name" placeholder="First and last name" maxlength="80" required>
+              </div>
+              <div class="field">
+                <label for="g-phone">Phone number</label>
+                <input id="g-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="07XX XXX XXX" maxlength="24" required>
+              </div>
+              <!-- Spam trap: hidden from people, filled in by bots -->
+              <div class="hp" aria-hidden="true">
+                <label for="g-website">Website</label>
+                <input id="g-website" name="website" type="text" tabindex="-1" autocomplete="off">
+              </div>
+              <p class="err" id="err" role="alert"></p>
+              <button class="btn btn-gold" type="submit" id="submit">Reserve my seat</button>
+              <p class="fine">Your details go only to Ian, so he can send you the venue.</p>
+            </form>
+
+            <div class="done" id="done" hidden>
+              <div class="mini">
+                <span class="serial">Admit one · Ian's 30th · Fri 27 Nov · 7 PM</span>
+                <h4 id="t-name">Guest</h4>
+                <p id="t-phone"></p>
+              </div>
+              <p class="status" id="status">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M6.5 10.2l2.3 2.3 4.7-4.9"/></svg>
+                <span id="status-text"></span>
+              </p>
+              <div class="actions">
+                <a class="btn" id="wa-rsvp" href="#" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+                  <span id="wa-rsvp-label">Message Ian on WhatsApp</span>
+                </a>
+              </div>
+              <button class="linkish" type="button" id="edit">Change my details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="sig foil">With love, Ian</div>
+      <p><span>Time to Elevate</span> · <span>27.11.2026</span> · <span>19:00 – 00:00</span></p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="/assets/js/config.js"></script>
+  <script src="/assets/js/page.js"></script>
+  <script src="/assets/js/intro.js"></script>
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>
